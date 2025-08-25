@@ -1,92 +1,97 @@
-# Multi Person Detection and Tracking
+ 🎓 Smart Classroom Automation System
 
-This repository contains a Python script for person detection and tracking using the YOLOv3 object detection model and OpenCV. The script processes a video stream or video file and detects and tracks people in real-time. Note that the script currently runs on CPU, so the frame rate may be limited compared to GPU-accelerated implementations.
+An AI + IoT based Classroom Automation Project that automatically controls lights and fans based on student presence detection using cameras. The system is designed to save electricity, reduce manual intervention, and scale easily across multiple classrooms.
 
-## Versions
+📌 Features
 
-- personTrackingV1.py -> Contains bare minimum backbone of multi person detection and tracking by creating an object for every person and plotting their prajectory.
-- personTrackingV2.py -> Updated version of personTrackingV1.py. Counting the number of people going in and coming out is done. Didn't give good enough results.
-- main.py             -> Thresholding is done to eliminate the multiple people being detected.
+🎥 Camera-based Detection – Uses image processing to detect student presence.
 
-## Features
+⚡ Automatic Appliance Control – Lights and fans turn ON when students are present and OFF when the classroom is empty.
 
-- Real-time person detection and tracking
-- Trajectory visualization for tracked persons
-- Toggle processing frames on and off using the 'a' key
-- Display frames per second (FPS) on the video feed
+🖧 Centralized Control Hub – A Raspberry Pi/Arduino in the control room manages multiple classrooms.
 
-## Prerequisites
+🔗 Relay-based Switching – Relays installed in each classroom control appliances.
 
-Before running the script, ensure you have the following prerequisites installed:
+🌐 Scalable Architecture – Easily add new classrooms using wired (RS-485) or wireless (ESP8266/ESP32) modules.
 
-- Python (3.x recommended)
-- OpenCV (cv2)
-- NumPy
-- CUDA (optional for GPU acceleration)
-- YOLOv3 weights and configuration files (Included in this repository)
-- COCO names file (Included in this repository)
+📊 Energy Efficiency – Saves electricity and reduces costs.
 
-You can install the required Python libraries using pip:
+🏗️ System Architecture
+            +---------------------+
+            |   Raspberry Pi Hub  |
+            |  (Central Control)  |
+            +----------+----------+
+                       |
+                RS-485 / Wi-Fi
+                       |
+   ---------------------------------------------------
+   |                     |                           |
++--+--+              +---+---+                   +---+---+
+|Relay|              | Relay |                   | Relay |
+|(Clsrm 1)           | (Clsrm 2)                 | (Clsrm N)
++--+--+              +---+---+                   +---+---+
+   |                     |                           |
+ Lights & Fans     Lights & Fans               Lights & Fans
 
-```bash
-pip install opencv-python numpy
-```
+🔧 Hardware Used
+
+🖥️ Raspberry Pi (Central Controller)
+
+⚡ Arduino/ESP8266/ESP32 (Optional, for communication)
+
+🔌 Relay Modules (for switching lights & fans)
+
+🎥 Cameras (for presence detection)
+
+🔋 Power Supply
+
+🛠️ Wires, connectors, and enclosures
+
+💻 Software Stack
+
+Python (OpenCV / TensorFlow) → For student presence detection
+
+Arduino IDE → For microcontroller programming
+
+RS-485 / Wi-Fi Communication → For central hub ↔ classrooms
+
+Flask/Django (Optional) → For web-based monitoring dashboard
+
+🚀 Installation & Setup
+
+Clone this repository
+
+git clone https://github.com/your-username/smart-classroom-automation.git
+cd smart-classroom-automation
 
 
+Install Dependencies (on Raspberry Pi)
+
+pip install opencv-python numpy pyserial
 
 
+Upload Relay Control Code to Arduino/ESP8266 using Arduino IDE.
 
+Connect Cameras & Relays as per wiring diagram.
 
-# Setup
-```bash
-git clone https://github.com/pardhu-nadella/multi-person-detection-and-tracking.git
-cd multi-person-detection-and-tracking
-```
-Download the dependencies for this project in the same working directory.
-<a href="https://example.com" class="button">Download Dependencies</a>
+Run Main Controller
 
-
-
-# Usage
-To run the person detection and tracking script, use the following command:
-```bash
 python main.py
-```
 
-You can change the video source by modifying the cap variable. For example, to use a webcam, set cap to:
-```bash
-cap = cv2.VideoCapture(0)
-```
+📸 Demo
 
-To use a video file, provide the file path:
-```bash
-cap = cv2.VideoCapture("path_to_an_mp4_file.mp4")
-```
-(Lines 16 and 17 in main.py)
+(Add GIFs, images, or YouTube video link here to showcase the project)
 
+🛠️ Future Improvements
 
-# Controls
-- Press 'a' to toggle processing frames on and off.
-- Press 'q' to exit the application.
+📡 Mobile app for remote monitoring & control.
 
+📊 Dashboard with energy usage analytics.
 
+🔒 Security integration with face recognition.
 
-# Notes
-The script is set to run on CPU by default. To enable GPU acceleration, uncomment the net.setPreferableBackend and net.setPreferableTarget lines (lines 28 and 29 in main.py) accordingly.
+🌍 Integration with IoT cloud platforms.
 
-```bash
-# For GPU acceleration
-net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
-net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
-```
+🤝 Contributing
 
-# Example Output
-<a href="https://youtu.be/8HyhrgQ-PSM">Follow this link for video output</a>
-
-
-
-
-
-You're encouraged to actively contribute to this personal repository by enhancing its functionality, introducing innovative features, or optimizing it in any way you can. If you encounter any challenges or have valuable insights to share, please don't hesitate to open a GitHub issue. Your input is highly appreciated, and your collaboration in refining this project for even better results is welcome.
-
-For engaging discussions and further communication, please feel free to connect with the repository owner on LinkedIn. Your feedback is valued. Here's to a successful journey in the realm of person detection and tracking!
+Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to change.
