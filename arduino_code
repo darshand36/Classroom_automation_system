@@ -1,0 +1,32 @@
+#define LED_PIN 7  // Pin for the LED (use the pin where the LED is connected)
+
+void setup() {
+  // Start the serial communication
+  Serial.begin(9600);
+  
+  // Set the LED pin as an output
+  pinMode(LED_PIN, OUTPUT);
+  
+  // Ensure the LED is off at the start
+  digitalWrite(LED_PIN, LOW);
+}
+
+void loop() {
+  // Check if data is available to read from the serial port
+  if (Serial.available() > 0) {
+    // Read the incoming byte
+    char signal = Serial.read();
+    
+    // If the signal is 'H', turn the LED off (reversed logic)
+    if (signal == 'H') {
+      digitalWrite(LED_PIN, LOW);  // Turn off LED
+      Serial.println("LED OFF");
+    }
+    
+    // If the signal is 'L', turn the LED on (reversed logic)
+    else if (signal == 'L') {
+      digitalWrite(LED_PIN, HIGH);  // Turn on LED
+      Serial.println("LED ON");
+    }
+  }
+}
